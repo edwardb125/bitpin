@@ -5,10 +5,52 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body {
+          text-align: center;
+        }
+        .main-class {
+            display: flex;
+        }
+        .main {
+            text-align: center;
+            justify-content: center;
+            width: 100%;
+        }
+        .content {
+            margin: 10px;
+            border: 2px solid black;
+            text-align: center;
+            border-radius: 2%;
+        }
+        .vote {
+            border: 2px solid black;
+            width: 30%;
+            height: 100px;
+            padding: 20px;
+            margin: 10px;
+        }
+        button {
+            width: 120px;
+            height: 40px;
+            background: rgb(12, 192, 12);
+            margin: 15px;
+        }
+        .title {
+            background-color: rgb(12, 192, 12);
+        }
+        .link{
+            border: 1px solid black;
+            padding: 9px;
+            width: 130px;
+            height: 50px;
+        }
+    </style>
 </head>
 <body>
-    {% for content in contents[0] %}
     <div class="main">
+        {% for content in contents[0] %}
+    <div class="content">
         <div class="title">
             <h1>{{ content.title }}</h1>
         </div>
@@ -19,7 +61,8 @@
         {% endif %}
     </div>
     {% endfor %}
-    <a href="/vote">Go to vote page</a>
+    </div>
+    <a href="/vote" class="link">Go to vote page</a>
 
 </body>
 </html>

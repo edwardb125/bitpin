@@ -1,45 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="article_style.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body {
+          text-align: center;
+        }
+        .main-class {
+            display: flex;
+        }
+        .main {
+            text-align: center;
+            justify-content: center;
+            width: 60%;
+        }
+        .content {
+            margin: 10px;
+            border: 2px solid black;
+            text-align: center;
+            border-radius: 2%;
+        }
+        .vote {
+            border: 2px solid black;
+            width: 30%;
+            height: 100px;
+            padding: 20px;
+            margin: 10px;
+        }
+        button {
+            width: 120px;
+            height: 40px;
+            background: rgb(12, 192, 12);
+            margin: 15px;
+        }
+        .title {
+            background-color: rgb(12, 192, 12);
+        }
+    </style>
 </head>
 <body>
-    {% for content in contents[0] %}
-    <div class="main">
-        <div class="title">
-            <h1>{{ content.title }}</h1>
+    <div class="main-class">
+        <div class="main">
+            {% for content in contents[0] %}
+                <div class="content">
+                    <div class="title">
+                        <h1>{{ content.title }}</h1>
+                    </div>
+                    <div class="text">
+                        <p>{{ content.text }}</p>
+                    </div>
+                    <p>{{ content.vote }} people voted</p>
+                    <p>score {{ content.score }}</p>
+                    <!-- <p>your score 5</p> -->
+                </div>
+            {% endfor %}
         </div>
-        <div class="text">
-            <p>{{ content.text }}</p>
+    
+        <div class="vote">
+            <form action="/add_vote" method="post">
+                <div>
+                    <label>Submit your vote for: </label>
+                    <select name="title">
+                        <option>Crypto</option>
+                        <option>Bitcoin</option>
+                        <option>Bitpin</option>
+                    </select>
+                    <select name="vote">
+                        <option>0</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                    <br>
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
         </div>
-        <p>{{ content.vote }} people voted</p>
-        <p>score {{ content.score }}</p>
-        <!-- <p>your score 5</p> -->
     </div>
-    {% endfor %}
-
-    <form action="/add_vote" method="post">
-        <div>
-            <label>Submit your vote for: </label>
-            <select name="title">
-                <option>Crypto</option>
-                <option>Bitcoin</option>
-                <option>Bitpin</option>
-              </select>
-              <select name="vote">
-                <option>0</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-              </select>
-            <br>
-            <button type="submit">Submit</button>
-        </div>
-    </form>
 </body>
 </html>
