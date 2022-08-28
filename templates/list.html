@@ -21,7 +21,8 @@
             margin: 10px;
             border: 2px solid black;
             text-align: center;
-            border-radius: 2%;
+            border-radius: 1%;
+            justify-content: center;
         }
         .vote {
             border: 2px solid black;
@@ -57,7 +58,9 @@
         <p>{{ content.vote }} people voted</p>
         <p>score {{ content.score }}</p>
         {% if contents[1][content.title] != -1 %}
-        <p>your submitted score is {{contents[1][content.title]}}</p>
+        <div class="score">
+            <p class="score-number">your submitted score is {{contents[1][content.title]}}</p>
+        </div>
         {% endif %}
     </div>
     {% endfor %}

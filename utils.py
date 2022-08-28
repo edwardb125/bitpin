@@ -8,7 +8,7 @@ for i in result:
     user_score[i['title']] = -1 #-1 means: No points have been given
 
 def home_page_function():
-    return 'hello'
+    return ''
 
 
 def list_function():
