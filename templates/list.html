@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% for content in contents[0] %}
+    <div class="main">
+        <div class="title">
+            <h1>{{ content.title }}</h1>
+        </div>
+        <p>{{ content.vote }} people voted</p>
+        <p>score {{ content.score }}</p>
+        {% if contents[1][content.title] != -1 %}
+        <p>your submitted score is {{contents[1][content.title]}}</p>
+        {% endif %}
+    </div>
+    {% endfor %}
+    <a href="/vote">Go to vote page</a>
+
+</body>
+</html>
