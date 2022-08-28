@@ -2,12 +2,10 @@ from xml.dom.minidom import Document
 from settings import contents
 from flask import render_template, request
 
-
-user_score = {
-    "Crypto": -1,
-    "Bitcoin": -1,
-    "Bitpin": -1,
-}
+user_score = {}
+result = contents.find()
+for i in result:
+    user_score[i['title']] = -1
 
 def home_page_function():
     return 'hello'
