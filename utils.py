@@ -1,32 +1,24 @@
-from xml.dom.minidom import Document
-from settings import contents
-from flask import render_template, request
-
 user_score = {}
 
-def init():
-    result = contents.find()
+
+def init(content_collection):
+    result = content_collection.find()
     for i in result:
         user_score[i['title']] = -1 #-1 means: No points have been given
+    return user_score
 
 
-def list_function():
-    result = contents.find()
+def list_function(content_collection):
+    result = content_collection.find()
     content = [result, user_score]
-    return render_template('list.html', contents = content)
-    
-
-def article_function():
-    result = contents.find()
-    content = [result, user_score]
-    return render_template('article.html', contents = content)
+    return content
 
 
-def update_vote(topic_name, vote):
+def update_vote(content_collection, topic_name, vote):
     vote_number = vote
     score = 0
     add_user_count = True
-    content = contents.find_one({
+    content = content_collection.find_one({
         'title': topic_name
     })
     if(user_score[topic_name] != -1):
@@ -41,11 +33,12 @@ def update_vote(topic_name, vote):
     else: 
         score = ((content['score'] * content['vote']) + vote_number)/(content['vote'])
     update_object["$set"]['score'] = round(score, 3)
-    contents.update_one({'title': topic_name}, update_object)
-    
+    updated = content_collection.update_one({'title': topic_name}, update_object)
+    return updated
 
 
-def add_vote_function():
+def add_vote_function(content_collection, request):
     vote = request.form.get("vote")
     topic_name = request.form.get("title")
-    update_vote(topic_name, int(vote))
+    updated = update_vote(content_collection, topic_name, int(vote))
+    return updated
